@@ -1,0 +1,15 @@
+.main-div {
+    height:100vh;
+    .invalid-field {
+        border: 2px solid #ea5c52;
+    }
+    .invalid-name {
+        color: #ea5c52;
+    }
+    .submit-btn {
+        width: 150px;
+    }
+    .spinner {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+}

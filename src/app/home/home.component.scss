@@ -1,0 +1,27 @@
+td, th {
+    text-align: center;
+}
+.pagination-div {
+    display: flex;
+    justify-content:flex-end;
+    padding: 0 24px;
+}
+.spinner {
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100vw;
+  height: 100vh;
+  top: 0px;
+  left: 0px
+}
+.filter-div {
+  display: flex;
+  justify-content: space-between;
+  padding:12px;
+  .filter-butn {
+    color: black
+  }
+  .filter-img {
+    width:26px;
+    height:26px
+  }
+}

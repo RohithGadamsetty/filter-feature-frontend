@@ -1,0 +1,45 @@
+<form #f="ngForm" (ngSubmit)="OnSubmit(f)">
+  <div class="px-4">
+    <div class="row align-items-center justify-content-center main-div">
+      <div class="col-12 col-sm-6">
+        <div class="row align-items-center">
+          <img class="mx-auto" src="assets/logos/brand-logo.png">
+
+        </div>
+      </div>
+      <div class="col-12 col-sm-6">
+        <div class="form-group">
+          <label [class.invalid-name]="(emailCtrl.invalid && emailCtrl.touched) || isAuthInvalid">Email address</label>
+          <input type="email" (keyup)="isAuthInvalid=false"
+            [class.invalid-field]="(emailCtrl.invalid && emailCtrl.touched) || isAuthInvalid" class="form-control"
+            name="email" required #emailCtrl="ngModel" ngModel [pattern]="patterns('email')"
+            placeholder="Please enter email">
+        </div>
+        <div class="form-group">
+          <label [class.invalid-name]="(passwordCtrl.invalid && passwordCtrl.touched) || isAuthInvalid">Password</label>
+          <input (keyup)="isAuthInvalid=false"
+            [class.invalid-field]="(passwordCtrl.invalid && passwordCtrl.touched) || isAuthInvalid"
+            [type]="!showPassword ? 'password' : 'text'" class="form-control" name="password" required
+            #passwordCtrl="ngModel" ngModel [pattern]="patterns('text')" placeholder="Please enter password">
+        </div>
+        <div class="form-check">
+          <input type="checkbox" name="showPassword" [(ngModel)]="showPassword" class="form-check-input"
+            id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Show password</label>
+        </div>
+        <div *ngIf="isAuthInvalid" class="mt-1">
+          <label class="invalid-name">Invalid username or password</label>
+        </div>
+        <div class="mt-4 row justify-content-center">
+          <button [disabled]="f.invalid" type="submit" class="btn btn-danger submit-btn">Submit</button>
+        </div>
+      </div>
+      <div *ngIf="isLoading"
+        class="position-absolute w-100 h-100 row justify-content-center align-items-center spinner">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

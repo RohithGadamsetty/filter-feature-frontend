@@ -1,0 +1,50 @@
+.main-div {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    .centered-div {
+        background-color: white;
+        border-radius: 8px;
+        .filter-butn {
+          color: black;
+        }
+        .filter-img {
+          width:26px;
+          height:26px
+        }
+        .filter-label {
+          width: 165px
+        }
+        .select-field {
+          border: 2px solid rgba(0, 0, 0, 0.1);
+          border-radius: 4px;
+          margin-left: 16px !important;
+          padding-right: 6px;
+          height: 38px;
+        }
+        .cancel-butn {
+          border:2px solid rgba(0, 0, 0, 0.1) !important
+        }
+    }
+    .invalid-field {
+        border: 2px solid #ea5c52;
+    }
+    .invalid-name {
+        color: #ea5c52;
+    }
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+

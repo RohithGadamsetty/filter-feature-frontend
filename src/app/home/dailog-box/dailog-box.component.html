@@ -1,0 +1,130 @@
+<div class="main-div" (click)="closeModalOnClick()">
+  <form #f="ngForm" class="w-100 h-100">
+    <div class="row align-items-center justify-content-center w-100 h-100">
+      <div *ngIf="type==='application'" class="centered-div p-3" (click)="$event.stopPropagation()">
+        <div class="row justify-content-center">
+          <div class="form-group px-3 py-2">
+            <label [class.invalid-name]="nameCtrl.invalid && nameCtrl.touched">Full Name</label>
+            <input type="text" [class.invalid-field]="nameCtrl.invalid && nameCtrl.touched" class="form-control"
+              name="name" pattern="\s*(\S\s*){2,}" required #nameCtrl="ngModel" ngModel placeholder="Please enter name">
+          </div>
+          <div class="form-group px-3 py-2">
+            <label [class.invalid-name]="experienceCtrl.invalid && experienceCtrl.touched">Years of
+              experience</label>
+            <input type="number" [class.invalid-field]="experienceCtrl.invalid && experienceCtrl.touched"
+              class="form-control" name="experience" required #experienceCtrl="ngModel" ngModel
+              placeholder="Please enter years of experience">
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="form-group px-3 py-2">
+            <label [class.invalid-name]="locationCtrl.invalid && locationCtrl.touched">Current
+              Location</label>
+            <input type="text" [class.invalid-field]="locationCtrl.invalid && locationCtrl.touched" class="form-control"
+              name="location" pattern="\s*(\S\s*){2,}" min required #locationCtrl="ngModel" ngModel
+              placeholder="Please enter current location">
+          </div>
+          <div class="form-group px-3 py-2">
+            <label [class.invalid-name]="skillsCtrl.invalid && skillsCtrl.touched">Skills</label>
+            <input type="text" [class.invalid-field]="skillsCtrl.invalid && skillsCtrl.touched" class="form-control"
+              name="skills" pattern="\s*(\S\s*){2,}" required #skillsCtrl="ngModel" ngModel
+              placeholder="Please enter skills">
+          </div>
+        </div>
+        <div class="row align-items-center justify-content-center">
+          <button (click)="closeModalOnClick()" type="button"
+            class="btn btn-light mr-2 w-25 cancel-butn">Cancel</button>
+          <button (click)="closeModalOnClick()" [disabled]="f.invalid" type="button"
+            class="btn btn-danger ml-2 w-25">Apply</button>
+        </div>
+      </div>
+
+
+      <div *ngIf="type==='filter'" class="centered-div p-3" (click)="$event.stopPropagation()">
+        <div class="row justify-content-end align-items-center md-2 pr-2">
+          <button (click)="clearFilters()" type="button" class="btn btn-info filter-butn">Clear filters<img
+              class="ml-2 filter-img" src="assets/icons/filter.svg"></button>
+        </div>
+        <div class="row align-items-center pl-2">
+          <label class="filter-label">Search by Project name</label>
+          <div class="form-group px-3 py-2 m-0">
+            <input type="text" class="form-control" name="projectName" [(ngModel)]="storedData.projectName" ngModel
+              placeholder="Please enter project name">
+          </div>
+        </div>
+        <div class="row align-items-center pl-2">
+          <label class="filter-label">Search by Client name</label>
+          <div class="form-group px-3 py-2 m-0">
+            <input type="text" class="form-control" name="clientName" [(ngModel)]="storedData.clientName" ngModel
+              placeholder="Please enter client name">
+          </div>
+        </div>
+        <div class="row align-items-center pl-2">
+          <label class="filter-label">Start date</label>
+          <select class="form-select ml-2 select-field" [ngModel]="storedData.startDateOperand" name="startDateOperand"
+            ngModel aria-label="Default select example">
+            <option value="null">select matching</option>
+            <option value="==">exact date</option>
+            <option value=">=">from date (after)</option>
+            <option value="<=">from date (before)</option>
+          </select>
+          <div class="form-group px-3 py-2 m-0">
+            <input type="date" class="form-control" name="startDate" [(ngModel)]="storedData.startDate" ngModel
+              placeholder="Please enter client name">
+          </div>
+        </div>
+        <div class="row align-items-center pl-2">
+          <label class="filter-label">No of employees</label>
+          <select class="form-select ml-2 select-field" [ngModel]="storedData.noOfEmployeesOperand"
+            name="noOfEmployeesOperand" ngModel aria-label="Default select example">
+            <option value="null">select matching</option>
+            <option value="==">equals to</option>
+            <option value=">=">greater than (equals)</option>
+            <option value="<=">less than (equals)</option>
+          </select>
+          <div class="form-group px-3 py-2 m-0">
+            <input type="number" class="form-control" name="noOfEmployees" ngModel
+              [(ngModel)]="storedData.noOfEmployees" placeholder="Please enter client name">
+          </div>
+        </div>
+        <div class="row align-items-center pl-2">
+          <label class="filter-label">Experience Required</label>
+          <select class="form-select ml-2 select-field" [ngModel]="storedData.experienceRequiredOperand"
+            name="experienceRequiredOperand" ngModel aria-label="Default select example">
+            <option value="null">select matching</option>
+            <option value="==">equals to</option>
+            <option value=">=">greater than (equals)</option>
+            <option value="<=">less than (equals)</option>
+          </select>
+          <div class="form-group px-3 py-2 m-0">
+            <input type="number" class="form-control" name="experienceRequired" ngModel
+              [(ngModel)]="storedData.experienceRequired" placeholder="Please enter client name">
+          </div>
+        </div>
+        <div class="row align-items-center pl-2">
+          <label class="filter-label">Skills required</label>
+          <div class="form-group px-3 py-2 m-0">
+            <input type="text" class="form-control" name="skillsRequired" [(ngModel)]="storedData.skillsRequired"
+              ngModel placeholder="Please enter skills">
+          </div>
+        </div>
+        <div class="row align-items-center pl-2 mt-1">
+          <label class="filter-label">location</label>
+          <select class="form-select ml-2 select-field" [ngModel]="storedData.location" placeholder="Select location"
+            name="location" ngModel aria-label="Default select example">
+            <option value="null" selected>Select location</option>
+            <option value="mumbai">Mumbai</option>
+            <option value="chennai">Chennai</option>
+            <option value="delhi">Delhi</option>
+          </select>
+        </div>
+        <div class="row align-items-center justify-content-center mt-3">
+          <button (click)="closeModalOnClick()" type="button"
+            class="btn btn-light mr-2 w-25 cancel-butn">Cancel</button>
+          <button (click)="search(f)" [disabled]="f.invalid" type="button"
+            class="btn btn-danger ml-2 w-25">Search</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

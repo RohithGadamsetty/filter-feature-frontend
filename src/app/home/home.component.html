@@ -1,0 +1,59 @@
+<div>
+  <div class="filter-div">
+    <button (click)="isShowDialog=true;dialogType='filter'" type="button" class="btn btn-info filter-butn">Filters<img
+        class="ml-2 filter-img" src="assets/icons/filter.svg"></button>
+    <button type="button" (click)="logout()" class="btn btn-danger">Logout</button>
+
+  </div>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Project Name</th>
+        <th scope="col">Client Name</th>
+        <th scope="col">Start date</th>
+        <th scope="col">Number of employees</th>
+        <th scope="col">Experience required</th>
+        <th scope="col">Skills required</th>
+        <th scope="col">Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr (click)="isShowDialog=true;dialogType='application'" *ngFor="let project of displayProjectDetails">
+        <th scope="row">{{project.projectName}}</th>
+        <td>{{project.clientName}}</td>
+        <td>{{(project.startDate * 1000) | date:'MMM d, y'}}</td>
+        <td>{{project.noOfEmployees}}</td>
+        <td>{{project.experienceRequired}}</td>
+        <td>{{project.skillsRequired}}</td>
+        <td>{{project.location}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="displayProjectDetails.length === 0" class="row justify-content-center align-items-center w-100 py-5">
+    <h4>Data for available</h4>
+  </div>
+
+  <div class="containr">
+    <div class="pagination-div">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" *ngIf="currentIndex!==1"
+            (click)="getPagination('previous')">Previous</a></li>
+        <li class="page-item" *ngFor="let value of returnArraylength();let i=index"><a class="page-link"
+            (click)="getPagination(i+1)">{{i+1}}</a></li>
+        <li class="page-item"><a class="page-link"
+            *ngIf="((currentIndex-1)*tableLimit)+tableLimit<=projectDetails.length"
+            (click)="getPagination('next')">Next</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<app-dailog-box *ngIf="isShowDialog" [type]="dialogType" (closeModal)="onCloseDialog($event)"></app-dailog-box>
+
+<div *ngIf="isLoading" class="position-absolute spinner">
+  <div class="w-100 h-100 row justify-content-center align-items-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</div>
